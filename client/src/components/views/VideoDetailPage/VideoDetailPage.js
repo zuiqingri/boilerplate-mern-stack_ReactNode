@@ -4,7 +4,7 @@ import axios from 'axios';
  import SideVideo from './Sections/SideVideo';
  import Subscribe from './Sections/Subscribe';
 
-// import Comments from './Sections/Comments'
+ import Comments from './Sections/Comments'
 // import LikeDislikes from './Sections/LikeDislikes';
 
 function VideoDetailPage(props) {
@@ -76,7 +76,7 @@ function VideoDetailPage(props) {
                             />
                             <div></div>
                         </List.Item>
-
+                            <Comments postId={videoId}/>
                         {/* <Comments CommentLists={CommentLists} postId={Video._id} refreshFunction={updateComment} /> */}
 
                     </div>
