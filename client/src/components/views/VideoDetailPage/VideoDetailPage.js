@@ -5,7 +5,7 @@ import axios from 'axios';
  import Subscribe from './Sections/Subscribe';
 
  import Comments from './Sections/Comments'
-// import LikeDislikes from './Sections/LikeDislikes';
+ import LikeDislikes from './Sections/LikeDislikes';
 
 function VideoDetailPage(props) {
 
@@ -53,7 +53,7 @@ function VideoDetailPage(props) {
                         <video style={{ width: '100%' }} src={`http://localhost:5000/${VideoDetail.filePath}`} controls></video>
 
                         <List.Item
-                            actions={[subscribeButton]}
+                            actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')}/>,subscribeButton]}
                             // actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')}  />, <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} />]}
                         >
                             <List.Item.Meta
