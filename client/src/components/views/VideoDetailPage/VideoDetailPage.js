@@ -11,7 +11,7 @@ function VideoDetailPage(props) {
 
     const videoId = props.match.params.videoId
     const [VideoDetail, setVideoDetail] = useState([])
-    // const [CommentLists, setCommentLists] = useState([])
+    const [CommentLists, setCommentLists] = useState([])
 
     const videoVariable = {
         videoId: videoId
@@ -26,35 +26,22 @@ function VideoDetailPage(props) {
                     alert('Failed to get video Info')
                 }
             })
+        axios.post('/api/comment/getComments', videoVariable)
+            .then(response => {
+                if (response.data.success) {
+                   
+                    setCommentLists(response.data.comments)
+                    console.log('response.data.comments',response.data.comments)
+                } else {
+                    alert('Failed to get video Info')
+                }
+            })
         },[])
-       
-    // useEffect(() => {
-    //     axios.post('/api/video/getVideo', videoVariable)
-    //         .then(response => {
-    //             if (response.data.success) {
-    //                 console.log(response.data.video)
-    //                 setVideo(response.data.video)
-    //             } else {
-    //                 alert('Failed to get video Info')
-    //             }
-    //         })
+    
 
-    //     axios.post('/api/comment/getComments', videoVariable)
-    //         .then(response => {
-    //             if (response.data.success) {
-    //                 console.log('response.data.comments',response.data.comments)
-    //                 setCommentLists(response.data.comments)
-    //             } else {
-    //                 alert('Failed to get video Info')
-    //             }
-    //         })
-
-
-    // }, [])
-
-    // const updateComment = (newComment) => {
-    //     setCommentLists(CommentLists.concat(newComment))
-    // }
+    const updateComment = (newComment) => {
+        setCommentLists(CommentLists.concat(newComment))
+    }
 
 
      if (VideoDetail.writer) {
@@ -76,8 +63,8 @@ function VideoDetailPage(props) {
                             />
                             <div></div>
                         </List.Item>
-                            <Comments postId={videoId}/>
-                        {/* <Comments CommentLists={CommentLists} postId={Video._id} refreshFunction={updateComment} /> */}
+                            
+                        <Comments CommentLists={CommentLists} postId={videoId} refreshFunction={updateComment} />
 
                     </div>
                 </Col>
